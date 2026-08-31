@@ -8,6 +8,10 @@ ErrorDocument 404 /404.html
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
+  # Hostinger lasă repo-ul git în directorul site-ului la fiecare publicare.
+  # Fără regula asta, oricine ar putea citi istoricul de la /.git/.
+  RewriteRule "(^|/)\.(git|github)" - [F,L]
+
   # Totul pe https
   RewriteCond %{HTTPS} !=on
   RewriteCond %{HTTP:X-Forwarded-Proto} !https
